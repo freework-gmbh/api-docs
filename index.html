@@ -200,7 +200,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,7 +212,6 @@
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
               <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
@@ -233,7 +232,85 @@
 
 <p>Welcome to the Freework API!</p>
 
+<p>This api is used for all of our mobile app. We try to keep them as up to date as possible.
+Please let us know if something is missing or if there are any bugs at <a href="mailto:tech@freework.io">tech@freework.io</a></p>
+
+<h2 id="general-information">General information</h2>
+<pre class="highlight shell tab-shell"><code><span class="nb">export </span><span class="nv">API_URL</span><span class="o">=</span><span class="s2">"api.freework.io"</span>
+</code></pre><pre class="highlight ruby tab-ruby"><code><span class="no">API_URL</span> <span class="o">=</span> <span class="s2">"api.freework.io"</span>
+</code></pre>
+<p>The api base url will be referenced as <code class="prettyprint">API_URL</code> in the rest of the documentation.
+It differs depending on environment (e.g. edge or production).</p>
+
+<blockquote>
+<p><code class="prettyprint">Content-Type: application/json</code></p>
+</blockquote>
+
+<p>Please always make sure to always send <code class="prettyprint">Content-Type: application/json</code> in the header.</p>
+
 <h1 id="authentication">Authentication</h1>
+
+<p>API clients receive an opaque access token, to be used in all subsequent requests (HTTP header). The access token times out after a pre-defined number of seconds. Once this time-out has occurred, the client must acquire a new access token by using the opaque refresh token it received together with the access token (or re-authenticate from scratch).</p>
+
+<p>Before the client receives its tokens, the user has to authenticate successfully by providing valid credentials, using one of the following auth methods:</p>
+
+<ul>
+<li><strong>Freework account</strong>: Login via email address and password</li>
+<li><strong>Linkedin Signin</strong>: The user has to grant Freework access to his/her profile</li>
+</ul>
+
+<h2 id="registration">Registration</h2>
+
+<h3 id="post-users-registration">POST /users/registration</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Client-ID: Client-ID of app'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request POST <span class="s1">'$API_URL/users'</span> <span class="se">\</span>
+     --data <span class="s1">'{
+       "email": "jane@example.com",
+       "last_name": "Cruz",
+       "password": "secret"
+       "password_confirmation": "secret"
+     }'</span>
+</code></pre>
+<p>Sign up for a Freework account. This endpoint is public (i.e. it does not require a Freework <code class="prettyprint">access_token</code>).
+However you need to provide a valid <strong>client id</strong> in the request header. Each of the apps (Android and iOS) have
+their own <code class="prettyprint">Client-ID</code> as a secret. The Freework API checks if the provided <code class="prettyprint">Client-ID</code> is among the allowed Client-IDs.</p>
+
+<h3 id="attribute-defintions">Attribute Defintions</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>x</td>
+<td>has to be a valid not taken email address</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>string</td>
+<td>x</td>
+<td>User&rsquo;s last name</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>x</td>
+<td>Users password of choice</td>
+</tr>
+<tr>
+<td>password_confirmation</td>
+<td>string</td>
+<td>x</td>
+<td>has to match password</td>
+</tr>
+</tbody></table>
 
           <h1 id="errors">Errors</h1>
 
@@ -288,7 +365,6 @@
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
                 <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
