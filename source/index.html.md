@@ -3,8 +3,6 @@ title: Freework API
 
 language_tabs:
   - shell
-  - ruby
-  - javascript
 
 toc_footers:
   - <a href='mailto:tech@freework.io'>Sign Up for a Developer Key</a>
