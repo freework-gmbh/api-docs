@@ -29,10 +29,6 @@ Please let us know if something is missing or if there are any bugs at <tech@fre
 export API_URL="api.freework.io"
 ```
 
-```ruby
-API_URL = "api.freework.io"
-```
-
 The api base url will be referenced as `API_URL` in the rest of the documentation.
 It differs depending on environment (e.g. edge or production).
 
