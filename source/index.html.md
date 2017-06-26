@@ -7,7 +7,7 @@ language_tabs:
   - javascript
 
 toc_footers:
-  - <a href='tech@freework.io'>Sign Up for a Developer Key</a>
+  - <a href='mailto:tech@freework.io'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
