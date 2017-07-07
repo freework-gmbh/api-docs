@@ -64,7 +64,12 @@ Attribute	| Type | Mandatory |Definition
 email | string | x | has to be a valid not taken email address
 last_name | string | x | User's last name
 password  | string | x | Users password of choice
-password_confirmation | string | x | has to match password
+
+
+### Errors
+Status	| Key | Description
+----------|------|-----------|----------
+422 | email_taken | Account with this email address already exists
 
 
 ## Sign In
