@@ -267,7 +267,6 @@ It differs depending on environment (e.g. edge or production).</p>
          "email": "jane@example.com",
          "last_name": "Cruz",
          "password": "secret"
-         "password_confirmation": "secret"
        }
      }'</span>
 </code></pre>
@@ -330,11 +329,21 @@ their own <code class="prettyprint">Client-ID</code> as a secret. The Freework A
 <td>x</td>
 <td>Users password of choice</td>
 </tr>
+</tbody></table>
+
+<h3 id="errors">Errors</h3>
+
+<table><thead>
 <tr>
-<td>password_confirmation</td>
-<td>string</td>
-<td>x</td>
-<td>has to match password</td>
+<th>Status</th>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>422</td>
+<td>email_taken</td>
+<td>Account with this email address already exists</td>
 </tr>
 </tbody></table>
 
