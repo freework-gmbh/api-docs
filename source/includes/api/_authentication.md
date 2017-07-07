@@ -19,7 +19,6 @@ curl --header 'Client-ID: Client-ID of app' \
          "email": "jane@example.com",
          "last_name": "Cruz",
          "password": "secret"
-         "password_confirmation": "secret"
        }
      }'
 ```
