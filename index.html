@@ -349,10 +349,10 @@ their own <code class="prettyprint">Client-ID</code> as a secret. The Freework A
 
 <h2 id="sign-in">Sign In</h2>
 
-<h3 id="post-users-sessions-signin">POST /users/sessions/signin</h3>
+<h3 id="post-users-sessions-sign_in">POST /users/sessions/sign_in</h3>
 <pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Client-ID: Client-ID of app'</span> <span class="se">\</span>
      --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-     --request POST <span class="s1">'$API_URL/users/sessions/signin'</span> <span class="se">\</span>
+     --request POST <span class="s1">'$API_URL/users/sessions/sign_in'</span> <span class="se">\</span>
      --data <span class="s1">'{
        "user": {
          "email": "jane@example.com",
@@ -422,10 +422,10 @@ their own <code class="prettyprint">Client-ID</code> as a secret. The Freework A
 
 <h2 id="sign-in-with-linkedin">Sign In with LinkedIn</h2>
 
-<h3 id="post-users-linkedin-signin">POST /users/linkedin/signin</h3>
+<h3 id="post-users-linkedin-sign_in">POST /users/linkedin/sign_in</h3>
 <pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Client-ID: Client-ID of app'</span> <span class="se">\</span>
      --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-     --request POST <span class="s1">'$API_URL/users/sessions/signin'</span> <span class="se">\</span>
+     --request POST <span class="s1">'$API_URL/users/sessions/sign_in'</span> <span class="se">\</span>
      --data <span class="s1">'{
        "access-token": "some-linkedin-access-token",
        "mobile-sdk": true
@@ -498,7 +498,7 @@ their own <code class="prettyprint">Client-ID</code> as a secret. The Freework A
 <h3 id="post-users-sessions-refresh">POST /users/sessions/refresh</h3>
 
 <p>Freework access token are short lived. Once a access token expires the client can either
-signin again or use their refresh token to aquire a new access_token (recommended).
+sign in again or use their refresh token to aquire a new access_token (recommended).
 Access tokens have an expire date long enough in the future (90 days).</p>
 <pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Client-ID: Client-ID of app'</span> <span class="se">\</span>
      --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
