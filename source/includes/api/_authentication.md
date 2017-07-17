@@ -72,12 +72,12 @@ Status	| Key | Description
 
 
 ## Sign In
-### POST /users/sessions/signin
+### POST /users/sessions/sign_in
 
 ```shell
 curl --header 'Client-ID: Client-ID of app' \
      --header 'Content-Type: application/json' \
-     --request POST '$API_URL/users/sessions/signin' \
+     --request POST '$API_URL/users/sessions/sign_in' \
      --data '{
        "user": {
          "email": "jane@example.com",
@@ -132,12 +132,12 @@ password  | string | x | Password of the account
 
 
 ## Sign In with LinkedIn
-### POST /users/linkedin/signin
+### POST /users/linkedin/sign_in
 
 ```shell
 curl --header 'Client-ID: Client-ID of app' \
      --header 'Content-Type: application/json' \
-     --request POST '$API_URL/users/sessions/signin' \
+     --request POST '$API_URL/users/sessions/sign_in' \
      --data '{
        "access-token": "some-linkedin-access-token",
        "mobile-sdk": true
@@ -196,7 +196,7 @@ mobile_sdk  | boolean | x | Was the access token aquired with the linkedin mobil
 ### POST /users/sessions/refresh
 
 Freework access token are short lived. Once a access token expires the client can either
-signin again or use their refresh token to aquire a new access_token (recommended).
+sign in again or use their refresh token to aquire a new access_token (recommended).
 Access tokens have an expire date long enough in the future (90 days).
 
 
