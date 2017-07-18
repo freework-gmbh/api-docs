@@ -723,6 +723,90 @@ However you need to provide a valid freework <code class="prettyprint">access_to
   </span><span class="p">},</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+          <h2 id="create-customer">Create Customer</h2>
+
+<h3 id="put-customers">PUT /customers</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request PATCH <span class="s1">'$API_URL/customers'</span> <span class="se">\</span>
+     --data <span class="s1">'{
+        {
+          "customer": {
+            "name": "Example Inc",
+            "currency": "EUR",
+            "color": "#cccccc"
+          }
+        }
+     }'</span>
+</code></pre>
+<p>Create a new customer with the attributes provided.
+You need to provide a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
+
+<p>Allowed attributes are:</p>
+
+<h3 id="attribute-defintions">Attribute Defintions</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>x</td>
+<td>has to be a valid string</td>
+</tr>
+<tr>
+<td>color</td>
+<td>string</td>
+<td>x</td>
+<td>has to be a valid color hex code</td>
+</tr>
+<tr>
+<td>address</td>
+<td>json</td>
+<td></td>
+<td>ignore for now</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>x</td>
+<td>has to be a valid currency code(ISO 4217)</td>
+</tr>
+<tr>
+<td>hourly_rate</td>
+<td>numeric</td>
+<td>has to be a valid numeric value (eg. 21.5)</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16886c8a-9175-459c-a550-1ea7297b296f"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Inc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"line1"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"line2"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"line3"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"region"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#cccccc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"houry_rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
           <h1 id="errors">Errors</h1>
 
 <p>The Freework API uses the following error codes:</p>
