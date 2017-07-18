@@ -19,7 +19,7 @@ However you need to provide a valid freework `access_token` in the request heade
   "user": {
       "id": "84390fcc-adcb-4446-afc3-4a6f7edeb12f",
       "email": "jane@example.com",
-      "first_name": null,
+      "first_name": "Jane",
       "last_name": "Cruz",
       "linkedin_id": null,
       "created_at": "2017-06-25 17:43:35 UTC",

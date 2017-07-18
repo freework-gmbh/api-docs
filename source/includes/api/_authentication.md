@@ -17,7 +17,7 @@ curl --header 'Client-ID: Client-ID of app' \
      --data '{
        "user": {
          "email": "jane@example.com",
-         "last_name": "Cruz",
+         "first_name": "Penelope",
          "password": "secret"
        }
      }'
@@ -34,8 +34,8 @@ their own `Client-ID` as a secret. The Freework API checks if the provided `Clie
   "user": {
       "id": "84390fcc-adcb-4446-afc3-4a6f7edeb12f",
       "email": "jane@example.com",
-      "first_name": null,
-      "last_name": "Cruz",
+      "first_name": "Penelope",
+      "last_name": null,
       "linkedin_id": null,
       "created_at": "2017-06-25 17:43:35 UTC",
       "updated_at": "2017-06-25 17:43:35 UTC",
@@ -61,7 +61,7 @@ their own `Client-ID` as a secret. The Freework API checks if the provided `Clie
 Attribute	| Type | Mandatory |Definition
 ----------|------|-----------|----------
 email | string | x | has to be a valid not taken email address
-last_name | string | x | User's last name
+first_name | string | x | User's first name
 password  | string | x | Users password of choice
 
 
@@ -97,7 +97,7 @@ their own `Client-ID` as a secret. The Freework API checks if the provided `Clie
   "user": {
       "id": "84390fcc-adcb-4446-afc3-4a6f7edeb12f",
       "email": "jane@example.com",
-      "first_name": null,
+      "first_name": "Jane",
       "last_name": "Cruz",
       "linkedin_id": null,
       "created_at": "2017-06-25 17:43:35 UTC",
@@ -157,7 +157,7 @@ their own `Client-ID` as a secret. The Freework API checks if the provided `Clie
   "user": {
       "id": "84390fcc-adcb-4446-afc3-4a6f7edeb12f",
       "email": "jane@example.com",
-      "first_name": null,
+      "first_name": "Jane",
       "last_name": "Cruz",
       "linkedin_id": null,
       "created_at": "2017-06-25 17:43:35 UTC",
@@ -216,7 +216,7 @@ curl --header 'Client-ID: Client-ID of app' \
   "user": {
       "id": "84390fcc-adcb-4446-afc3-4a6f7edeb12f",
       "email": "jane@example.com",
-      "first_name": null,
+      "first_name": "Jane",
       "last_name": "Cruz",
       "linkedin_id": null,
       "created_at": "2017-06-25 17:43:35 UTC",
