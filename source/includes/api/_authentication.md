@@ -247,3 +247,36 @@ curl --header 'Client-ID: Client-ID of app' \
 Attribute	| Type | Mandatory |Definition
 ----------|------|-----------|----------
 refresh_token | string | x | has to be a valid not expired refresh token
+
+
+
+## Forgot Password
+### POST /users/sessions/forgot_password
+
+```shell
+curl --header 'Client-ID: Client-ID of app' \
+     --header 'Content-Type: application/json' \
+     --request POST '$API_URL/users/sessions/forgot_password' \
+     --data '{
+       "user": {
+         "email": "jane@example.com"
+       }
+     }'
+```
+
+Send a link to reset the password to the email address provided. There has to be an account with that email address.
+This endpoint is public (i.e. it does not require a Freework `access_token`).
+However you need to provide a valid **Client-ID* in the request header. Each of the apps (Android and iOS) have
+their own `Client-ID` as a secret. The Freework API checks if the provided `Client-ID` is among the allowed Client-IDs.
+
+> Response with Status 200:
+
+```json
+Empty body
+```
+
+### Attribute Defintions
+
+Attribute	| Type | Mandatory |Definition
+----------|------|-----------|----------
+email | string | x | has to be the email address of the account
