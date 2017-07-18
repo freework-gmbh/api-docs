@@ -1,12 +1,12 @@
 # Customers
 
 ## Create Customer
-### PUT /customers
+### POST /customers
 
 ```shell
 curl --header 'Authorization: Bearer: some-freework-access-token' \
      --header 'Content-Type: application/json' \
-     --request PUT '$API_URL/customers' \
+     --request POST '$API_URL/customers' \
      --data '{
         {
           "customer": {
