@@ -730,7 +730,7 @@ However you need to provide a valid freework <code class="prettyprint">access_to
 <h3 id="put-customers">PUT /customers</h3>
 <pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
      --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-     --request PATCH <span class="s1">'$API_URL/customers'</span> <span class="se">\</span>
+     --request PUT <span class="s1">'$API_URL/customers'</span> <span class="se">\</span>
      --data <span class="s1">'{
         {
           "customer": {
@@ -741,10 +741,8 @@ However you need to provide a valid freework <code class="prettyprint">access_to
         }
      }'</span>
 </code></pre>
-<p>Create a new customer with the attributes provided.
+<p>Creates a new customer with the attributes provided.
 You need to provide a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
-
-<p>Allowed attributes are:</p>
 
 <h3 id="attribute-defintions">Attribute Defintions</h3>
 
@@ -783,8 +781,8 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
 <tr>
 <td>hourly_rate</td>
 <td>numeric</td>
-<td>has to be a valid numeric value (eg. 21.5)</td>
 <td></td>
+<td>has to be a valid numeric value (eg. 21.5)</td>
 </tr>
 </tbody></table>
 
@@ -809,6 +807,73 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<h2 id="list-customer">List Customer</h2>
+
+<h3 id="get-customers">GET /customers</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request GET <span class="s1">'$API_URL/customers'</span>
+</code></pre>
+<p>Returns all customers of the current user (limit is 100).
+You need to provide a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94c298b5-0e9c-4dbe-9f1d-cda0722aca49"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Freework"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"line1"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"line2"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"line3"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"region"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#abcabc"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"houry_rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ae32be60-14a8-4ce3-98e8-02471b0201d0"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Inc"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"line1"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"line2"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"line3"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"region"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#cccccc"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"houry_rate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2 id="delete-customer">Delete Customer</h2>
+
+<h3 id="delete-customers-id">DELETE /customers/:id</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request DELETE <span class="s1">'$API_URL/customers/ae32be60-14a8-4ce3-98e8-02471b0201d0'</span>
+</code></pre>
+<p>Deletes the customer with this id. It has to belong to the current user.
+You need to provide a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
+
+<blockquote>
+<p>Response with Status 200 if Customer is deleted</p>
+
+<p>Response with Status 404 if Customer is not found
+&ldquo;`</p>
+</blockquote>
+
           <h1 id="errors">Errors</h1>
 
 <p>The Freework API uses the following error codes:</p>
