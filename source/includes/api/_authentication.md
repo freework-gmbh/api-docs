@@ -131,7 +131,7 @@ email | string | x | has to be the email address of the account
 password  | string | x | Password of the account
 
 
-## Sign In with LinkedIn
+## Sign in with LinkedIn
 ### POST /users/linkedin/sign_in
 
 ```shell

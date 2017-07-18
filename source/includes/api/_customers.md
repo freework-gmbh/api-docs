@@ -53,7 +53,7 @@ hourly_rate | numeric | | has to be a valid numeric value (eg. 21.5)
 }
 ```
 
-## List Customer
+## List Customers
 ### GET /customers
 
 ```shell
