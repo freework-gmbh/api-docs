@@ -118,8 +118,9 @@ curl --header 'Authorization: Bearer: some-freework-access-token' \
 Deletes the customer with this id. It has to belong to the current user.
 You need to provide a valid freework `access_token` in the request header.
 
-> Response with Status 200 if Customer is deleted
+> Response with Status 200 if customer is deleted
 
-> Response with Status 404 if Customer is not found
+> Response with Status 404 if customer is not found
+
 ```
 
