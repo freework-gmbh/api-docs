@@ -557,6 +557,46 @@ Access tokens have an expire date long enough in the future (90 days).</p>
 </tr>
 </tbody></table>
 
+<h2 id="forgot-password">Forgot Password</h2>
+
+<h3 id="post-users-sessions-forgot_password">POST /users/sessions/forgot_password</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Client-ID: Client-ID of app'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request POST <span class="s1">'$API_URL/users/sessions/forgot_password'</span> <span class="se">\</span>
+     --data <span class="s1">'{
+       "user": {
+         "email": "jane@example.com"
+       }
+     }'</span>
+</code></pre>
+<p>Send a link to reset the password to the email address provided. There has to be an account with that email address.
+This endpoint is public (i.e. it does not require a Freework <code class="prettyprint">access_token</code>).
+However you need to provide a valid *<em>Client-ID</em> in the request header. Each of the apps (Android and iOS) have
+their own <code class="prettyprint">Client-ID</code> as a secret. The Freework API checks if the provided <code class="prettyprint">Client-ID</code> is among the allowed Client-IDs.</p>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">Empty</span><span class="w"> </span><span class="err">body</span><span class="w">
+</span></code></pre>
+<h3 id="attribute-defintions">Attribute Defintions</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>x</td>
+<td>has to be the email address of the account</td>
+</tr>
+</tbody></table>
+
           <h1 id="users">Users</h1>
 
 <h2 id="show-user">Show User</h2>
