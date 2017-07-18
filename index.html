@@ -727,10 +727,10 @@ However you need to provide a valid freework <code class="prettyprint">access_to
 
 <h2 id="create-customer">Create Customer</h2>
 
-<h3 id="put-customers">PUT /customers</h3>
+<h3 id="post-customers">POST /customers</h3>
 <pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
      --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-     --request PUT <span class="s1">'$API_URL/customers'</span> <span class="se">\</span>
+     --request POST <span class="s1">'$API_URL/customers'</span> <span class="se">\</span>
      --data <span class="s1">'{
         {
           "customer": {
