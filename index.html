@@ -857,6 +857,87 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
+<h2 id="update-customer">Update Customer</h2>
+
+<h3 id="patch-customers-id">PATCH /customers/:id</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request PATCH <span class="s1">'$API_URL/customers/ae32be60-14a8-4ce3-98e8-02471b0201d0'</span> <span class="se">\</span>
+     --data <span class="s1">'{
+        {
+          "customer": {
+            "name": "New name",
+            "hourly_rate": 25.4
+          }
+        }
+     }'</span>
+</code></pre>
+<p>Updates customer with the attributes provided. Not provided attributes are not changed.
+You need to provide a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
+
+<h3 id="attribute-defintions">Attribute Defintions</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>x</td>
+<td>has to be a valid string</td>
+</tr>
+<tr>
+<td>color</td>
+<td>string</td>
+<td>x</td>
+<td>has to be a valid color hex code</td>
+</tr>
+<tr>
+<td>address</td>
+<td>json</td>
+<td></td>
+<td>ignore for now</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>x</td>
+<td>has to be a valid currency code(ISO 4217)</td>
+</tr>
+<tr>
+<td>hourly_rate</td>
+<td>numeric</td>
+<td></td>
+<td>has to be a valid numeric value (eg. 21.5)</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16886c8a-9175-459c-a550-1ea7297b296f"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"line1"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"line2"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"line3"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"postal_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"region"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#cccccc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"houry_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">25.4</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <h2 id="delete-customer">Delete Customer</h2>
 
 <h3 id="delete-customers-id">DELETE /customers/:id</h3>
