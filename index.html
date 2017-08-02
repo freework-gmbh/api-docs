@@ -954,6 +954,89 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
 <p>Response with Status 404 if customer is not found</p>
 </blockquote>
 
+          <h1 id="tasks">Tasks</h1>
+
+<h2 id="create-task">Create Task</h2>
+
+<h3 id="post-tasks">POST /tasks</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request POST <span class="s1">'$API_URL/tasks'</span> <span class="se">\</span>
+     --data <span class="s1">'{
+      "task": {
+          "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
+          "description": "This is an example paragraph",
+          "starts_at": "2017-07-21T08:22:56Z",
+          "hourly_rate": "25.5",
+          "currency": "EUR"
+      }
+     }'</span>
+</code></pre>
+<p>Creates a new task with the attributes provided.
+You need to provide a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
+
+<h3 id="attribute-defintions">Attribute Defintions</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customer_id</td>
+<td>uuid</td>
+<td>x</td>
+<td>has to be an existing customer of the user</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>x</td>
+<td>has to be a valid description</td>
+</tr>
+<tr>
+<td>starts_at</td>
+<td>string</td>
+<td>x</td>
+<td>Date when the task starts (iso8601 format)</td>
+</tr>
+<tr>
+<td>ends_at</td>
+<td>string</td>
+<td></td>
+<td>Date when the task ends (iso8601 format)</td>
+</tr>
+<tr>
+<td>hourly_rate</td>
+<td>numeric</td>
+<td></td>
+<td>has to be a valid numeric value (eg. 21.5)</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>x</td>
+<td>has to be a valid currency code(ISO 4217)</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"task"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16886c8a-9175-459c-a550-1ea7297b296f"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25.5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
           <h1 id="errors">Errors</h1>
 
 <p>The Freework API uses the following error codes:</p>
