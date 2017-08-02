@@ -12,6 +12,7 @@ includes:
   - api/authentication
   - api/users
   - api/customers
+  - api/tasks
   - errors
 
 search: true
