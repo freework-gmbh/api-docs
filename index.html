@@ -1037,6 +1037,227 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<h2 id="list-tasks">List Tasks</h2>
+
+<h3 id="get-tasks">GET /tasks</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request GET <span class="s1">'$API_URL/tasks?limit=3&amp;starts_at[gte]=2017-08-10'</span>
+</code></pre>
+<p>Returns all the tasks of the current user (limit is 100). The request must contain a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customer_id</td>
+<td>uuid</td>
+<td></td>
+<td>has to be an existing customer of the user</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>integer</td>
+<td></td>
+<td>A value between 1..100 (default: 100)</td>
+</tr>
+<tr>
+<td>starts_at</td>
+<td>dictionary</td>
+<td></td>
+<td>A dictionary describing an interval for the starts_at field</td>
+</tr>
+<tr>
+<td>ends_at</td>
+<td>dictionary</td>
+<td></td>
+<td>A dictionary describing an interval for the ends_at field</td>
+</tr>
+</tbody></table>
+
+<h3 id="starts_at-ends_at-dictionaries">starts_at / ends_at dictionaries</h3>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>gte</td>
+<td>string</td>
+<td></td>
+<td>Return values where the field is after or equal to this timestamp.</td>
+</tr>
+<tr>
+<td>lte</td>
+<td>string</td>
+<td></td>
+<td>Return values where the field is before or equal to this timestamp.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"task"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"task"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ae32be60-14a8-4ce3-98e8-02471b0201d0"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94c298b5-0e9c-4dbe-9f1d-cda0722aca49"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is another example paragraph"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:23:40Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25.5"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2 id="update-task">Update Task</h2>
+
+<h3 id="patch-tasks-id">PATCH /tasks/:id</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request PATCH <span class="s1">'$API_URL/tasks/35608a6e-048c-4f45-9848-362e1341e697'</span> <span class="se">\</span>
+     --data <span class="s1">'{
+      "task": {
+          "hourly_rate": "50.5",
+          "currency": "USD"
+      }
+     }'</span>
+</code></pre>
+<p>Updates the task with the attributes provided, without changing the ones that are not included in the request.
+A valid freework <code class="prettyprint">access_token</code> is required on the header.</p>
+
+<p>Allowed attributes are:</p>
+
+<h3 id="attribute-defintions">Attribute Defintions</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>customer_id</td>
+<td>uuid</td>
+<td></td>
+<td>has to be an existing customer of the user</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td></td>
+<td>has to be a valid description</td>
+</tr>
+<tr>
+<td>starts_at</td>
+<td>string</td>
+<td></td>
+<td>Date when the task starts (iso8601 format)</td>
+</tr>
+<tr>
+<td>ends_at</td>
+<td>string</td>
+<td></td>
+<td>Date when the task ends (iso8601 format)</td>
+</tr>
+<tr>
+<td>hourly_rate</td>
+<td>numeric</td>
+<td></td>
+<td>has to be a valid numeric value (eg. 21.5)</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td></td>
+<td>has to be a valid currency code(ISO 4217)</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"task"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="read-task">Read Task</h2>
+
+<h3 id="get-tasks-id">GET /tasks/:id</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request GET <span class="s1">'$API_URL/tasks/35608a6e-048c-4f45-9848-362e1341e697'</span>
+</code></pre>
+<p>Returns the task for this id. The task must belong to the current user, and the request must contain a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"task"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="delete-task">Delete Task</h2>
+
+<h3 id="delete-tasks-id">DELETE /tasks/:id</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request DELETE <span class="s1">'$API_URL/tasks/35608a6e-048c-4f45-9848-362e1341e697'</span>
+</code></pre>
+<p>Deletes the task for this id. The task must belong to the current user, and the request must contain a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"task"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
           <h1 id="errors">Errors</h1>
 
 <p>The Freework API uses the following error codes:</p>
