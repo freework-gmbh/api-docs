@@ -1258,6 +1258,100 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<h2 id="pause-task">Pause Task</h2>
+
+<h3 id="patch-tasks-id-pause">PATCH /tasks/:id/pause</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request PATCH <span class="s1">'$API_URL/tasks/35608a6e-048c-4f45-9848-362e1341e697'</span> <span class="se">\</span>
+     --data <span class="s1">'{
+      "ended_at": "2017-08-16 15:50:03 UTC"
+     }'</span>
+</code></pre>
+<p>Pauses the timer for the selected task, updating the <code class="prettyprint">ended_at</code> field with the provided timestamp, setting the <code class="prettyprint">current_timer_started_at</code> to <code class="prettyprint">nil</code> and automatically updates the <code class="prettyprint">tracked_duration</code> field. The timer must be currently running (i.e. <code class="prettyprint">current_timer_started_at</code> cannot be <code class="prettyprint">nil</code>) for this request to succeed.
+A valid freework <code class="prettyprint">access_token</code> is required on the header.</p>
+
+<p>Allowed attributes are:</p>
+
+<h3 id="attribute-defintions">Attribute Defintions</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ended_at</td>
+<td>time</td>
+<td></td>
+<td>a UTC timestamp not earlier than the time when the task was first started or the timer was last initiated.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"task"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="pause-task">Pause Task</h2>
+
+<h3 id="patch-tasks-id-start">PATCH /tasks/:id/start</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request PATCH <span class="s1">'$API_URL/tasks/35608a6e-048c-4f45-9848-362e1341e697'</span> <span class="se">\</span>
+     --data <span class="s1">'{
+      "current_timer_started_at": "2017-08-16 15:50:03 UTC"
+     }'</span>
+</code></pre>
+<p>Resumes the timer for the selected task, updating the <code class="prettyprint">current_timer_started_at</code> field with the provided timestamp. The timer must be currently stopped (i.e. <code class="prettyprint">current_timer_started_at</code> equals to <code class="prettyprint">nil</code>) for this request to succeed.
+A valid freework <code class="prettyprint">access_token</code> is required on the header.</p>
+
+<p>Allowed attributes are:</p>
+
+<h3 id="attribute-defintions">Attribute Defintions</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>current_timer_started_at</td>
+<td>time</td>
+<td></td>
+<td>a UTC timestamp not earlier than the time when the task was first started or the timer was last stopped.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"task"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
           <h1 id="errors">Errors</h1>
 
 <p>The Freework API uses the following error codes:</p>
