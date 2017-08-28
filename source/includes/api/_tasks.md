@@ -199,3 +199,79 @@ Deletes the task for this id. The task must belong to the current user, and the 
   }
 }
 ```
+
+## Pause Task
+### PATCH /tasks/:id/pause
+
+```shell
+curl --header 'Authorization: Bearer: some-freework-access-token' \
+     --header 'Content-Type: application/json' \
+     --request PATCH '$API_URL/tasks/35608a6e-048c-4f45-9848-362e1341e697' \
+     --data '{
+      "ended_at": "2017-08-16 15:50:03 UTC"
+     }'
+```
+
+Pauses the timer for the selected task, updating the `ended_at` field with the provided timestamp, setting the `current_timer_started_at` to `nil` and automatically updates the `tracked_duration` field. The timer must be currently running (i.e. `current_timer_started_at` cannot be `nil`) for this request to succeed.
+A valid freework `access_token` is required on the header.
+
+Allowed attributes are:
+
+### Attribute Defintions
+
+Attribute | Type | Mandatory |Definition
+----------|------|-----------|----------
+ended_at | time | | a UTC timestamp not earlier than the time when the task was first started or the timer was last initiated.
+
+> Response with Status 200:
+
+```json
+{
+  "task": {
+    "id": "35608a6e-048c-4f45-9848-362e1341e697",
+    "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
+    "description": "This is an example paragraph",
+    "starts_at": "2017-07-21T08:22:56Z",
+    "hourly_rate": "50.5",
+    "currency": "USD"
+  }
+}
+```
+
+## Pause Task
+### PATCH /tasks/:id/start
+
+```shell
+curl --header 'Authorization: Bearer: some-freework-access-token' \
+     --header 'Content-Type: application/json' \
+     --request PATCH '$API_URL/tasks/35608a6e-048c-4f45-9848-362e1341e697' \
+     --data '{
+      "current_timer_started_at": "2017-08-16 15:50:03 UTC"
+     }'
+```
+
+Resumes the timer for the selected task, updating the `current_timer_started_at` field with the provided timestamp. The timer must be currently stopped (i.e. `current_timer_started_at` equals to `nil`) for this request to succeed.
+A valid freework `access_token` is required on the header.
+
+Allowed attributes are:
+
+### Attribute Defintions
+
+Attribute | Type | Mandatory |Definition
+----------|------|-----------|----------
+current_timer_started_at | time | | a UTC timestamp not earlier than the time when the task was first started or the timer was last stopped.
+
+> Response with Status 200:
+
+```json
+{
+  "task": {
+    "id": "35608a6e-048c-4f45-9848-362e1341e697",
+    "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
+    "description": "This is an example paragraph",
+    "starts_at": "2017-07-21T08:22:56Z",
+    "hourly_rate": "50.5",
+    "currency": "USD"
+  }
+}
+```
