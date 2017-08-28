@@ -238,7 +238,7 @@ ended_at | time | | a UTC timestamp not earlier than the time when the task was 
 }
 ```
 
-## Pause Task
+## Start Task
 ### PATCH /tasks/:id/start
 
 ```shell
