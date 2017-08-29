@@ -11,14 +11,15 @@ curl --header 'Authorization: Bearer: some-freework-access-token' \
       "task": {
           "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
           "description": "This is an example paragraph",
-          "starts_at": "2017-07-21T08:22:56Z",
+          "started_at": "2017-07-21T08:22:56Z",
+          "current_timer_started_at": "2017-07-21T08:22:56Z",
           "hourly_rate": "25.5",
           "currency": "EUR"
       }
      }'
 ```
 
-Creates a new task with the attributes provided.
+Creates a new task with the attributes provided and starts tracking time for it.
 You need to provide a valid freework `access_token` in the request header.
 
 ### Attribute Defintions
@@ -27,8 +28,9 @@ Attribute	| Type | Mandatory |Definition
 ----------|------|-----------|----------
 customer_id | uuid | x | has to be an existing customer of the user
 description | string | x  | has to be a valid description
-starts_at | string | x | Date when the task starts (iso8601 format)
-ends_at | string | | Date when the task ends (iso8601 format)
+started_at | string | x | Date when the task starts (iso8601 format)
+ended_at | string | | Date when the task ends (iso8601 format)
+current_timer_started_at | string | x | Date when the timer was started (iso8601 format)
 hourly_rate | numeric | | has to be a valid numeric value (eg. 21.5)
 currency | string | x | has to be a valid currency code(ISO 4217)
 
@@ -40,7 +42,10 @@ currency | string | x | has to be a valid currency code(ISO 4217)
     "id": "16886c8a-9175-459c-a550-1ea7297b296f",
     "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
     "description": "This is an example paragraph",
-    "starts_at": "2017-07-21T08:22:56Z",
+    "started_at": "2017-07-21T08:22:56Z",
+    "ended_at": null,
+    "current_timer_started_at": "2017-07-21T08:22:56Z",
+    "tracked_duration": 0,
     "hourly_rate": "25.5",
     "currency": "EUR"
   }
@@ -53,7 +58,7 @@ currency | string | x | has to be a valid currency code(ISO 4217)
 ```shell
 curl --header 'Authorization: Bearer: some-freework-access-token' \
      --header 'Content-Type: application/json' \
-     --request GET '$API_URL/tasks?limit=3&starts_at[gte]=2017-08-10'
+     --request GET '$API_URL/tasks?limit=3&started_at[gte]=2017-08-10'
 ```
 
 Returns all the tasks of the current user (limit is 100). The request must contain a valid freework `access_token` in the request header.
@@ -64,10 +69,10 @@ Argument | Type | Mandatory |Definition
 ----------|------|-----------|----------
 customer_id | uuid | | has to be an existing customer of the user
 limit | integer | | A value between 1..100 (default: 100)
-starts_at | dictionary | | A dictionary describing an interval for the starts_at field
-ends_at | dictionary | | A dictionary describing an interval for the ends_at field
+started_at | dictionary | | A dictionary describing an interval for the started_at field
+ended_at | dictionary | | A dictionary describing an interval for the ended_at field
 
-### starts_at / ends_at dictionaries
+### started_at / ended_at dictionaries
 
 Argument | Type | Mandatory |Definition
 ----------|------|-----------|----------
@@ -84,7 +89,10 @@ lte | string | | Return values where the field is before or equal to this timest
       "id": "35608a6e-048c-4f45-9848-362e1341e697",
       "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
       "description": "This is an example paragraph",
-      "starts_at": "2017-07-21T08:22:56Z",
+      "started_at": "2017-07-21T08:22:56Z",
+      "ended_at": null,
+      "current_timer_started_at": "2017-07-21T08:22:56Z",
+      "tracked_duration": 0,
       "hourly_rate": "50.5",
       "currency": "USD"
     }
@@ -94,7 +102,10 @@ lte | string | | Return values where the field is before or equal to this timest
       "id": "ae32be60-14a8-4ce3-98e8-02471b0201d0",
       "customer_id": "94c298b5-0e9c-4dbe-9f1d-cda0722aca49",
       "description": "This is another example paragraph",
-      "starts_at": "2017-07-21T08:23:40Z",
+      "started_at": "2017-07-21T08:23:40Z",
+      "ended_at": null,
+      "current_timer_started_at": "2017-07-21T08:22:56Z",
+      "tracked_duration": 0,
       "hourly_rate": "25.5",
       "currency": "EUR"
     }
@@ -118,6 +129,8 @@ curl --header 'Authorization: Bearer: some-freework-access-token' \
 ```
 
 Updates the task with the attributes provided, without changing the ones that are not included in the request.
+If you update the `tracked_duration` field, this will cause the `ended_at` timestamp to change as to keep the
+time tracking consistent.
 A valid freework `access_token` is required on the header.
 
 Allowed attributes are:
@@ -128,8 +141,9 @@ Attribute | Type | Mandatory |Definition
 ----------|------|-----------|----------
 customer_id | uuid | | has to be an existing customer of the user
 description | string | | has to be a valid description
-starts_at | string | | Date when the task starts (iso8601 format)
-ends_at | string | | Date when the task ends (iso8601 format)
+started_at | string | | Date when the task starts (iso8601 format)
+ended_at | string | | Date when the task ends (iso8601 format)
+tracked_duration | int | | Tracked interval, in seconds
 hourly_rate | numeric | | has to be a valid numeric value (eg. 21.5)
 currency | string | | has to be a valid currency code(ISO 4217)
 
@@ -141,7 +155,10 @@ currency | string | | has to be a valid currency code(ISO 4217)
     "id": "35608a6e-048c-4f45-9848-362e1341e697",
     "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
     "description": "This is an example paragraph",
-    "starts_at": "2017-07-21T08:22:56Z",
+    "started_at": "2017-07-21T08:22:56Z",
+    "ended_at": null,
+    "current_timer_started_at": "2017-07-21T08:22:56Z",
+    "tracked_duration": 0,
     "hourly_rate": "50.5",
     "currency": "USD"
   }
@@ -167,7 +184,10 @@ Returns the task for this id. The task must belong to the current user, and the 
     "id": "35608a6e-048c-4f45-9848-362e1341e697",
     "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
     "description": "This is an example paragraph",
-    "starts_at": "2017-07-21T08:22:56Z",
+    "started_at": "2017-07-21T08:22:56Z",
+    "ended_at": null,
+    "current_timer_started_at": "2017-07-21T08:22:56Z",
+    "tracked_duration": 0,
     "hourly_rate": "50.5",
     "currency": "USD"
   }
@@ -193,7 +213,10 @@ Deletes the task for this id. The task must belong to the current user, and the 
     "id": "35608a6e-048c-4f45-9848-362e1341e697",
     "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
     "description": "This is an example paragraph",
-    "starts_at": "2017-07-21T08:22:56Z",
+    "started_at": "2017-07-21T08:22:56Z",
+    "ended_at": null,
+    "current_timer_started_at": "2017-07-21T08:22:56Z",
+    "tracked_duration": 0,
     "hourly_rate": "50.5",
     "currency": "USD"
   }
@@ -231,14 +254,17 @@ ended_at | time | | a UTC timestamp not earlier than the time when the task was 
     "id": "35608a6e-048c-4f45-9848-362e1341e697",
     "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
     "description": "This is an example paragraph",
-    "starts_at": "2017-07-21T08:22:56Z",
+    "started_at": "2017-07-21T08:22:56Z",
+    "ended_at": "2017-07-21T08:23:56Z",
+    "current_timer_started_at": null,
+    "tracked_duration": 60,
     "hourly_rate": "50.5",
     "currency": "USD"
   }
 }
 ```
 
-## Start Task
+## Resume Task
 ### PATCH /tasks/:id/start
 
 ```shell
@@ -269,7 +295,10 @@ current_timer_started_at | time | | a UTC timestamp not earlier than the time wh
     "id": "35608a6e-048c-4f45-9848-362e1341e697",
     "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
     "description": "This is an example paragraph",
-    "starts_at": "2017-07-21T08:22:56Z",
+    "started_at": "2017-07-21T08:22:56Z",
+    "ended_at": "2017-07-21T08:23:56Z",
+    "current_timer_started_at": "2017-07-21T08:24:56Z",
+    "tracked_duration": 60,
     "hourly_rate": "50.5",
     "currency": "USD"
   }
