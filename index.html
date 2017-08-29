@@ -966,13 +966,14 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
       "task": {
           "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
           "description": "This is an example paragraph",
-          "starts_at": "2017-07-21T08:22:56Z",
+          "started_at": "2017-07-21T08:22:56Z",
+          "current_timer_started_at": "2017-07-21T08:22:56Z",
           "hourly_rate": "25.5",
           "currency": "EUR"
       }
      }'</span>
 </code></pre>
-<p>Creates a new task with the attributes provided.
+<p>Creates a new task with the attributes provided and starts tracking time for it.
 You need to provide a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
 
 <h3 id="attribute-defintions">Attribute Defintions</h3>
@@ -998,16 +999,22 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
 <td>has to be a valid description</td>
 </tr>
 <tr>
-<td>starts_at</td>
+<td>started_at</td>
 <td>string</td>
 <td>x</td>
 <td>Date when the task starts (iso8601 format)</td>
 </tr>
 <tr>
-<td>ends_at</td>
+<td>ended_at</td>
 <td>string</td>
 <td></td>
 <td>Date when the task ends (iso8601 format)</td>
+</tr>
+<tr>
+<td>current_timer_started_at</td>
+<td>string</td>
+<td>x</td>
+<td>Date when the timer was started (iso8601 format)</td>
 </tr>
 <tr>
 <td>hourly_rate</td>
@@ -1031,7 +1038,10 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16886c8a-9175-459c-a550-1ea7297b296f"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ended_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_timer_started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tracked_duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25.5"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1042,7 +1052,7 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
 <h3 id="get-tasks">GET /tasks</h3>
 <pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
      --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-     --request GET <span class="s1">'$API_URL/tasks?limit=3&amp;starts_at[gte]=2017-08-10'</span>
+     --request GET <span class="s1">'$API_URL/tasks?limit=3&amp;started_at[gte]=2017-08-10'</span>
 </code></pre>
 <p>Returns all the tasks of the current user (limit is 100). The request must contain a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
 
@@ -1069,20 +1079,20 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
 <td>A value between 1..100 (default: 100)</td>
 </tr>
 <tr>
-<td>starts_at</td>
+<td>started_at</td>
 <td>dictionary</td>
 <td></td>
-<td>A dictionary describing an interval for the starts_at field</td>
+<td>A dictionary describing an interval for the started_at field</td>
 </tr>
 <tr>
-<td>ends_at</td>
+<td>ended_at</td>
 <td>dictionary</td>
 <td></td>
-<td>A dictionary describing an interval for the ends_at field</td>
+<td>A dictionary describing an interval for the ended_at field</td>
 </tr>
 </tbody></table>
 
-<h3 id="starts_at-ends_at-dictionaries">starts_at / ends_at dictionaries</h3>
+<h3 id="started_at-ended_at-dictionaries">started_at / ended_at dictionaries</h3>
 
 <table><thead>
 <tr>
@@ -1115,7 +1125,10 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ended_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"current_timer_started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tracked_duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1125,7 +1138,10 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ae32be60-14a8-4ce3-98e8-02471b0201d0"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94c298b5-0e9c-4dbe-9f1d-cda0722aca49"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is another example paragraph"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:23:40Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:23:40Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ended_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"current_timer_started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tracked_duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25.5"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1146,6 +1162,8 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
      }'</span>
 </code></pre>
 <p>Updates the task with the attributes provided, without changing the ones that are not included in the request.
+If you update the <code class="prettyprint">tracked_duration</code> field, this will cause the <code class="prettyprint">ended_at</code> timestamp to change as to keep the
+time tracking consistent.
 A valid freework <code class="prettyprint">access_token</code> is required on the header.</p>
 
 <p>Allowed attributes are:</p>
@@ -1173,16 +1191,22 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
 <td>has to be a valid description</td>
 </tr>
 <tr>
-<td>starts_at</td>
+<td>started_at</td>
 <td>string</td>
 <td></td>
 <td>Date when the task starts (iso8601 format)</td>
 </tr>
 <tr>
-<td>ends_at</td>
+<td>ended_at</td>
 <td>string</td>
 <td></td>
 <td>Date when the task ends (iso8601 format)</td>
+</tr>
+<tr>
+<td>tracked_duration</td>
+<td>int</td>
+<td></td>
+<td>Tracked interval, in seconds</td>
 </tr>
 <tr>
 <td>hourly_rate</td>
@@ -1206,7 +1230,10 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ended_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_timer_started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tracked_duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1229,7 +1256,10 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ended_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_timer_started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tracked_duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1252,7 +1282,10 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ended_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_timer_started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tracked_duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -1299,13 +1332,16 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ended_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:23:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_timer_started_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tracked_duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
     </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h2 id="start-task">Start Task</h2>
+<h2 id="resume-task">Resume Task</h2>
 
 <h3 id="patch-tasks-id-start">PATCH /tasks/:id/start</h3>
 <pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
@@ -1346,7 +1382,10 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35608a6e-048c-4f45-9848-362e1341e697"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fab3368d-7295-4e72-aedd-42906ce000e9"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is an example paragraph"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:22:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ended_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:23:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"current_timer_started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-07-21T08:24:56Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"tracked_duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
     </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.5"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
   </span><span class="p">}</span><span class="w">
