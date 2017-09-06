@@ -71,6 +71,7 @@ customer_id | uuid | | has to be an existing customer of the user
 limit | integer | | A value between 1..100 (default: 100)
 started_at | dictionary | | A dictionary describing an interval for the started_at field
 ended_at | dictionary | | A dictionary describing an interval for the ended_at field
+includes | string | | A string containing the entities to be included with the tasks, separated by comma. Avaliables includes are: `customer`.
 
 ### started_at / ended_at dictionaries
 
@@ -83,9 +84,10 @@ lte | string | | Return values where the field is before or equal to this timest
 > Response with Status 200:
 
 ```json
-[
-  {
-    "task": {
+{
+  "tasks":
+  [
+    {
       "id": "35608a6e-048c-4f45-9848-362e1341e697",
       "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
       "description": "This is an example paragraph",
@@ -95,10 +97,8 @@ lte | string | | Return values where the field is before or equal to this timest
       "tracked_duration": 0,
       "hourly_rate": "50.5",
       "currency": "USD"
-    }
-  },
-  {
-    "task": {
+    },
+    {
       "id": "ae32be60-14a8-4ce3-98e8-02471b0201d0",
       "customer_id": "94c298b5-0e9c-4dbe-9f1d-cda0722aca49",
       "description": "This is another example paragraph",
@@ -109,8 +109,18 @@ lte | string | | Return values where the field is before or equal to this timest
       "hourly_rate": "25.5",
       "currency": "EUR"
     }
-  }
-]
+  ],
+  "customers":
+  [
+    {
+        "id": "94c298b5-0e9c-4dbe-9f1d-cda0722aca49",
+        "name": "Example Inc",
+        "color": "#cccccc",
+        "currency": "EUR",
+        "hourly_rate": "25.5"
+    }
+  ]
+}
 ```
 
 ## Update Task
@@ -176,6 +186,12 @@ curl --header 'Authorization: Bearer: some-freework-access-token' \
 
 Returns the task for this id. The task must belong to the current user, and the request must contain a valid freework `access_token` in the request header.
 
+### Arguments
+
+Argument | Type | Mandatory |Definition
+----------|------|-----------|----------
+includes | string | | A string containing the entities to be included with the tasks, separated by comma. Avaliables includes are: `customer`.
+
 > Response with Status 200:
 
 ```json
@@ -190,6 +206,13 @@ Returns the task for this id. The task must belong to the current user, and the 
     "tracked_duration": 0,
     "hourly_rate": "50.5",
     "currency": "USD"
+  },
+  "customer": {
+      "id": "fab3368d-7295-4e72-aedd-42906ce000e9",
+      "name": "Example Inc",
+      "color": "#cccccc",
+      "currency": "EUR",
+      "hourly_rate": "25.5"
   }
 }
 ```
