@@ -327,3 +327,45 @@ current_timer_started_at | time | | a UTC timestamp not earlier than the time wh
   }
 }
 ```
+
+## Current Task
+### GET /tasks/current
+
+```shell
+curl --header 'Authorization: Bearer: some-freework-access-token' \
+     --header 'Content-Type: application/json' \
+     --request GET '$API_URL/tasks/35608a6e-048c-4f45-9848-362e1341e697'
+```
+
+Returns the `task` that is currently running for the user, if any. A valid freework `access_token` is required on the header.
+
+### Arguments
+
+Argument | Type | Mandatory |Definition
+----------|------|-----------|----------
+includes | string | | A string containing the entities to be included with the tasks, separated by comma. Avaliables includes are: `customer`.
+
+> Response with Status 200:
+
+```json
+{
+  "task": {
+    "id": "35608a6e-048c-4f45-9848-362e1341e697",
+    "customer_id": "fab3368d-7295-4e72-aedd-42906ce000e9",
+    "description": "This is an example paragraph",
+    "started_at": "2017-07-21T08:22:56Z",
+    "ended_at": null,
+    "current_timer_started_at": "2017-07-21T08:22:56Z",
+    "tracked_duration": 0,
+    "hourly_rate": "50.5",
+    "currency": "USD"
+  },
+  "customer": {
+      "id": "fab3368d-7295-4e72-aedd-42906ce000e9",
+      "name": "Example Inc",
+      "color": "#cccccc",
+      "currency": "EUR",
+      "hourly_rate": "25.5"
+  }
+}
+```
