@@ -1,4 +1,4 @@
-# Users
+# Statistics
 
 ## Show Statistics
 ### GET /statistics
