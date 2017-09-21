@@ -1459,7 +1459,7 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
 <h3 id="get-tasks-current">GET /tasks/current</h3>
 <pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
      --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-     --request GET <span class="s1">'$API_URL/tasks/35608a6e-048c-4f45-9848-362e1341e697'</span>
+     --request GET <span class="s1">'$API_URL/tasks/current'</span>
 </code></pre>
 <p>Returns the <code class="prettyprint">task</code> that is currently running for the user, if any. A valid freework <code class="prettyprint">access_token</code> is required on the header.</p>
 
@@ -1504,6 +1504,21 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
       </span><span class="s2">"hourly_rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25.5"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="export-tasks">Export tasks</h2>
+
+<h3 id="get-tasks-exports-csv">GET /tasks/exports/csv</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request GET <span class="s1">'$API_URL/tasks/exports/csv'</span>
+</code></pre>
+<p>Generates a csv file containing the user&rsquo;s tasks information, and sends a email with the download link for the file.
+The endpoint itself does not return any data other than the status code.</p>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
           <h1 id="errors">Errors</h1>
 
