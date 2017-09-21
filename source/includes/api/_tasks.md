@@ -334,7 +334,7 @@ current_timer_started_at | time | | a UTC timestamp not earlier than the time wh
 ```shell
 curl --header 'Authorization: Bearer: some-freework-access-token' \
      --header 'Content-Type: application/json' \
-     --request GET '$API_URL/tasks/35608a6e-048c-4f45-9848-362e1341e697'
+     --request GET '$API_URL/tasks/current'
 ```
 
 Returns the `task` that is currently running for the user, if any. A valid freework `access_token` is required on the header.
@@ -368,4 +368,22 @@ includes | string | | A string containing the entities to be included with the t
       "hourly_rate": "25.5"
   }
 }
+```
+
+## Export tasks
+### GET /tasks/exports/csv
+
+```shell
+curl --header 'Authorization: Bearer: some-freework-access-token' \
+     --header 'Content-Type: application/json' \
+     --request GET '$API_URL/tasks/exports/csv'
+```
+
+Generates a csv file containing the user's tasks information, and sends a email with the download link for the file.
+The endpoint itself does not return any data other than the status code.
+
+> Response with Status 200:
+
+```json
+{}
 ```
