@@ -1513,7 +1513,8 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
      --request GET <span class="s1">'$API_URL/tasks/exports/csv'</span>
 </code></pre>
 <p>Generates a csv file containing the user&rsquo;s tasks information, and sends a email with the download link for the file.
-The endpoint itself does not return any data other than the status code.</p>
+The endpoint itself does not return any data other than the status code. If the user has already requested an export
+in the last hour, the server returns a 406 error.</p>
 
 <blockquote>
 <p>Response with Status 200:</p>
