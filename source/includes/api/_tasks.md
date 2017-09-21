@@ -380,7 +380,8 @@ curl --header 'Authorization: Bearer: some-freework-access-token' \
 ```
 
 Generates a csv file containing the user's tasks information, and sends a email with the download link for the file.
-The endpoint itself does not return any data other than the status code.
+The endpoint itself does not return any data other than the status code. If the user has already requested an export
+in the last hour, the server returns a 406 error.
 
 > Response with Status 200:
 
