@@ -11,6 +11,7 @@ toc_footers:
 includes:
   - api/authentication
   - api/users
+  - api/statistics
   - api/customers
   - api/tasks
   - errors
