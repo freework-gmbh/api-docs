@@ -31,6 +31,7 @@ starts_at | string | x | Date when the task starts (iso8601 format)
 ends_at | string | | Date when the task ends (iso8601 format)
 hourly_rate | numeric | | has to be a valid numeric value (eg. 21.5)
 currency | string | x | has to be a valid currency code(ISO 4217)
+tracked_duration | int | | Tracked interval, in seconds
 
 > Response with Status 200:
 
