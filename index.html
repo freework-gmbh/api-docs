@@ -1051,6 +1051,12 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
 <td>x</td>
 <td>has to be a valid currency code(ISO 4217)</td>
 </tr>
+<tr>
+<td>tracked_duration</td>
+<td>int</td>
+<td></td>
+<td>Tracked interval, in seconds</td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -1513,8 +1519,7 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
      --request GET <span class="s1">'$API_URL/tasks/exports/csv'</span>
 </code></pre>
 <p>Generates a csv file containing the user&rsquo;s tasks information, and sends a email with the download link for the file.
-The endpoint itself does not return any data other than the status code. If the user has already requested an export
-in the last hour, the server returns a 406 error.</p>
+The endpoint itself does not return any data other than the status code.</p>
 
 <blockquote>
 <p>Response with Status 200:</p>
