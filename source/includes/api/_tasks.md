@@ -59,6 +59,10 @@ currency | string | x | has to be a valid currency code(ISO 4217)
 curl --header 'Authorization: Bearer: some-freework-access-token' \
      --header 'Content-Type: application/json' \
      --request GET '$API_URL/tasks?limit=3&started_at[gte]=2017-08-10'
+
+curl --header 'Authorization: Bearer: some-freework-access-token' \
+    --header 'Content-Type: application/json' \
+    --request GET '$API_URL/tasks?limit=30&starting_after=59044a59-a782-47e7-8219-7477e21509b8'
 ```
 
 Returns all the tasks of the current user (limit is 100). The request must contain a valid freework `access_token` in the request header.
@@ -72,6 +76,8 @@ limit | integer | | A value between 1..100 (default: 100)
 started_at | dictionary | | A dictionary describing an interval for the started_at field
 ended_at | dictionary | | A dictionary describing an interval for the ended_at field
 includes | string | | A string containing the entities to be included with the tasks, separated by comma. Avaliables includes are: `customer`.
+starting_after | uuid | | Id of an existing task  to be used as cursor
+ending_before | uuid | | Id of an existing task  to be used as cursor
 
 ### started_at / ended_at dictionaries
 
