@@ -1082,6 +1082,10 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
 <pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
      --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
      --request GET <span class="s1">'$API_URL/tasks?limit=3&amp;started_at[gte]=2017-08-10'</span>
+
+curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+    --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+    --request GET <span class="s1">'$API_URL/tasks?limit=30&amp;starting_after=59044a59-a782-47e7-8219-7477e21509b8'</span>
 </code></pre>
 <p>Returns all the tasks of the current user (limit is 100). The request must contain a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
 
@@ -1124,6 +1128,18 @@ You need to provide a valid freework <code class="prettyprint">access_token</cod
 <td>string</td>
 <td></td>
 <td>A string containing the entities to be included with the tasks, separated by comma. Avaliables includes are: <code class="prettyprint">customer</code>.</td>
+</tr>
+<tr>
+<td>starting_after</td>
+<td>uuid</td>
+<td></td>
+<td>Id of an existing task  to be used as cursor</td>
+</tr>
+<tr>
+<td>ending_before</td>
+<td>uuid</td>
+<td></td>
+<td>Id of an existing task  to be used as cursor</td>
 </tr>
 </tbody></table>
 
@@ -1519,7 +1535,8 @@ A valid freework <code class="prettyprint">access_token</code> is required on th
      --request GET <span class="s1">'$API_URL/tasks/exports/csv'</span>
 </code></pre>
 <p>Generates a csv file containing the user&rsquo;s tasks information, and sends a email with the download link for the file.
-The endpoint itself does not return any data other than the status code.</p>
+The endpoint itself does not return any data other than the status code. If the user has already requested an export
+in the last hour, the server returns a 406 error.</p>
 
 <blockquote>
 <p>Response with Status 200:</p>
