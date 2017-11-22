@@ -18,7 +18,11 @@ curl --header 'Client-ID: Client-ID of app' \
        "user": {
          "email": "jane@example.com",
          "first_name": "Penelope",
-         "password": "secret"
+         "password": "secret",
+         "push_notifications":{
+           "player_id": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9",
+           "device_token": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9"
+         }
        }
      }'
 ```
@@ -63,6 +67,8 @@ Attribute	| Type | Mandatory |Definition
 email | string | x | has to be a valid not taken email address
 first_name | string | x | User's first name
 password  | string | x | Users password of choice
+player_id  | uuid |  | Device player_id from onesignal
+device_token  | uuid |  | Device push token from onesignal
 
 
 ### Errors
@@ -81,7 +87,11 @@ curl --header 'Client-ID: Client-ID of app' \
      --data '{
        "user": {
          "email": "jane@example.com",
-         "password": "secret"
+         "password": "secret",
+         "push_notifications":{
+           "player_id": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9",
+           "device_token": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9"
+         }
        }
      }'
 ```
@@ -129,7 +139,8 @@ Attribute	| Type | Mandatory |Definition
 ----------|------|-----------|----------
 email | string | x | has to be the email address of the account
 password  | string | x | Password of the account
-
+player_id  | uuid |  | Device player_id from onesignal
+device_token  | uuid |  | Device push token from onesignal
 
 ## Sign in with LinkedIn
 ### POST /users/linkedin/sign_in
@@ -140,7 +151,11 @@ curl --header 'Client-ID: Client-ID of app' \
      --request POST '$API_URL/users/sessions/sign_in' \
      --data '{
        "access-token": "some-linkedin-access-token",
-       "mobile-sdk": true
+       "mobile-sdk": true,
+       "push_notifications":{
+         "player_id": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9",
+         "device_token": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9"
+       }
      }'
 ```
 
@@ -190,7 +205,8 @@ Attribute	| Type | Mandatory |Definition
 ----------|------|-----------|----------
 access_token | string | x | has to be a not expired linkedin access_token
 mobile_sdk  | boolean | x | Was the access token aquired with the linkedin mobile sdk or using the web auth flow.
-
+player_id  | uuid |  | Device player_id from onesignal
+device_token  | uuid |  | Device push token from onesignal
 
 ## Refresh
 ### POST /users/sessions/refresh
