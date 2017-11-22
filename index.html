@@ -928,6 +928,116 @@ However you need to provide a valid freework <code class="prettyprint">access_to
   </span><span class="p">},</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+          <h1 id="users">Users</h1>
+
+<h2 id="show-user-notification-settings">Show User Notification Settings</h2>
+
+<h3 id="get-users-settings-notifications">GET /users/settings/notifications</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request GET <span class="s1">'$API_URL/users/84390fcc-adcb-4446-afc3-4a6f7edeb12f'</span>
+</code></pre>
+<p>Retrieves the notification settings for the current user.
+You need to provide a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"notification_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"morning"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"evening"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"weekdays"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"friday"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"monday"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"tuesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"thursday"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"wednesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="update-user-notification-settings">Update User Notification Settings</h2>
+
+<h3 id="patch-users-settings-notifications">PATCH /users/settings/notifications</h3>
+<pre class="highlight shell tab-shell"><code>curl --header <span class="s1">'Authorization: Bearer: some-freework-access-token'</span> <span class="se">\</span>
+     --header <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+     --request PATCH <span class="s1">'$API_URL/users/84390fcc-adcb-4446-afc3-4a6f7edeb12f'</span> <span class="se">\</span>
+     --data <span class="s1">'{
+       "push_notifications": {
+        "enabled": true,
+        "morning": true,
+        "evening": false,
+        "weekdays": {
+            "friday": false,
+            "monday": true,
+            "tuesday": true,
+            "thursday": true,
+            "wednesday": false
+        }
+    }
+     }'</span>
+</code></pre>
+<p>Update the user notification settings with the attributes provided. Not provided attributes won&rsquo;t be updated.
+You need to provide a valid freework <code class="prettyprint">access_token</code> in the request header.</p>
+
+<p>Allowed attributes are:</p>
+
+<h3 id="attribute-defintions">Attribute Defintions</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Mandatory</th>
+<th>Definition</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>enabled</td>
+<td>boolean</td>
+<td></td>
+<td>Sets the permission for sending notifications to the user.</td>
+</tr>
+<tr>
+<td>morning</td>
+<td>boolean</td>
+<td></td>
+<td>Sets the permission for sending notifications to the user in the morning.</td>
+</tr>
+<tr>
+<td>evening</td>
+<td>boolean</td>
+<td></td>
+<td>Sets the permission for sending notifications to the user in the evening.</td>
+</tr>
+<tr>
+<td>weekdays</td>
+<td>jsonb</td>
+<td></td>
+<td>Sets the permission for sending push notifications on each weekday.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response with Status 200:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"notification_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"morning"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"evening"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"weekdays"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"friday"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"monday"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"tuesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"thursday"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"wednesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
           <h1 id="statistics">Statistics</h1>
 
 <h2 id="show-statistics">Show Statistics</h2>
