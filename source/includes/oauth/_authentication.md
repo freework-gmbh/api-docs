@@ -1,4 +1,4 @@
-# Authentication
+# Oauth Authentication
 
 API clients receive an opaque access token, to be used in all subsequent requests (HTTP header). The access token times out after a pre-defined number of seconds. Once this time-out has occurred, the client must acquire a new access token by using the opaque refresh token it received together with the access token (or re-authenticate from scratch).
 
