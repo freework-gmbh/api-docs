@@ -12,6 +12,7 @@ includes:
   - oauth/authentication
   - api/authentication
   - api/users
+  - api/notification_settings
   - api/statistics
   - api/customers
   - api/tasks
