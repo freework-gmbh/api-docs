@@ -1,6 +1,6 @@
-# Users
+# Notification Settings
 
-## Show User Notification Settings
+## Show Notification Settings
 ### GET /users/settings/notifications
 
 ```shell
@@ -31,7 +31,7 @@ You need to provide a valid freework `access_token` in the request header.
 }
 ```
 
-## Update User Notification Settings
+## Update Notification Settings
 ### PATCH /users/settings/notifications
 
 ```shell
