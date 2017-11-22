@@ -266,7 +266,11 @@ It differs depending on environment (e.g. edge or production).</p>
        "user": {
          "email": "jane@example.com",
          "first_name": "Penelope",
-         "password": "secret"
+         "password": "secret",
+         "push_notifications":{
+           "player_id": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9",
+           "device_token": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9"
+         }
        }
      }'</span>
 </code></pre>
@@ -329,6 +333,18 @@ their own <code class="prettyprint">Client-ID</code> as a secret. The Freework A
 <td>x</td>
 <td>Users password of choice</td>
 </tr>
+<tr>
+<td>player_id</td>
+<td>uuid</td>
+<td></td>
+<td>Device player_id from onesignal</td>
+</tr>
+<tr>
+<td>device_token</td>
+<td>uuid</td>
+<td></td>
+<td>Device push token from onesignal</td>
+</tr>
 </tbody></table>
 
 <h3 id="errors">Errors</h3>
@@ -356,7 +372,11 @@ their own <code class="prettyprint">Client-ID</code> as a secret. The Freework A
      --data <span class="s1">'{
        "user": {
          "email": "jane@example.com",
-         "password": "secret"
+         "password": "secret",
+         "push_notifications":{
+           "player_id": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9",
+           "device_token": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9"
+         }
        }
      }'</span>
 </code></pre>
@@ -418,6 +438,18 @@ their own <code class="prettyprint">Client-ID</code> as a secret. The Freework A
 <td>x</td>
 <td>Password of the account</td>
 </tr>
+<tr>
+<td>player_id</td>
+<td>uuid</td>
+<td></td>
+<td>Device player_id from onesignal</td>
+</tr>
+<tr>
+<td>device_token</td>
+<td>uuid</td>
+<td></td>
+<td>Device push token from onesignal</td>
+</tr>
 </tbody></table>
 
 <h2 id="sign-in-with-linkedin">Sign in with LinkedIn</h2>
@@ -428,7 +460,11 @@ their own <code class="prettyprint">Client-ID</code> as a secret. The Freework A
      --request POST <span class="s1">'$API_URL/users/sessions/sign_in'</span> <span class="se">\</span>
      --data <span class="s1">'{
        "access-token": "some-linkedin-access-token",
-       "mobile-sdk": true
+       "mobile-sdk": true,
+       "push_notifications":{
+         "player_id": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9",
+         "device_token": "a4860d5c-ff09-4566-b54f-e7d9e4d395b9"
+       }
      }'</span>
 </code></pre>
 <p>Sign in with a LinkedIn account. This endpoint is public (i.e. it does not require a Freework <code class="prettyprint">access_token</code>).
@@ -490,6 +526,18 @@ their own <code class="prettyprint">Client-ID</code> as a secret. The Freework A
 <td>boolean</td>
 <td>x</td>
 <td>Was the access token aquired with the linkedin mobile sdk or using the web auth flow.</td>
+</tr>
+<tr>
+<td>player_id</td>
+<td>uuid</td>
+<td></td>
+<td>Device player_id from onesignal</td>
+</tr>
+<tr>
+<td>device_token</td>
+<td>uuid</td>
+<td></td>
+<td>Device push token from onesignal</td>
 </tr>
 </tbody></table>
 
