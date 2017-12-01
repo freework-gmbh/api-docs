@@ -383,6 +383,22 @@ curl --header 'Authorization: Bearer: some-freework-access-token' \
 Generates a csv file containing the user's tasks information, and sends a email with the download link for the file.
 The endpoint itself does not return any data other than the status code.
 
+### Arguments
+
+Argument | Type | Mandatory |Definition
+----------|------|-----------|----------
+customer_ids | Array of uuids | | has to be an array of existing customer_ids
+started_at | dictionary | | A dictionary describing an interval for the started_at field
+ended_at | dictionary | | A dictionary describing an interval for the ended_at field
+
+### started_at / ended_at dictionaries
+
+Argument | Type | Mandatory |Definition
+----------|------|-----------|----------
+gte | string | | Return values where the field is after or equal to this timestamp.
+lte | string | | Return values where the field is before or equal to this timestamp.
+
+
 > Response with Status 200:
 
 ```json
