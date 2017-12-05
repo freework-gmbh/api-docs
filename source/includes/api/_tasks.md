@@ -397,6 +397,7 @@ Argument | Type | Mandatory |Definition
 customer_ids | Array of uuids | | has to be an array of existing customer_ids
 started_at | dictionary | | A dictionary describing an interval for the started_at field
 ended_at | dictionary | | A dictionary describing an interval for the ended_at field
+columns | array of allowed columns | An array containing all allowed columns
 
 ### started_at / ended_at dictionaries
 
@@ -404,6 +405,19 @@ Argument | Type | Mandatory |Definition
 ----------|------|-----------|----------
 gte | string | | Return values where the field is after or equal to this timestamp.
 lte | string | | Return values where the field is before or equal to this timestamp.
+
+### columns array
+
+The following columns can be filtered:
+
+Column
+----------|
+started_at |
+customer_name |
+logged_hour |
+logged_money |
+currency |
+description |
 
 
 > Response with Status 200:
