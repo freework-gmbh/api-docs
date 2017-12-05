@@ -410,14 +410,14 @@ lte | string | | Return values where the field is before or equal to this timest
 
 The following columns can be filtered:
 
-Column
-----------|
-started_at |
-customer_name |
-logged_hour |
-logged_money |
-currency |
-description |
+Column | Description
+----------|---------------------------------
+started_at | The starting date of the tasks
+customer_name | The name of the customer
+logged_hour | The logged time of the task
+logged_money | The logged money of the task
+currency | The currency used for the logging of money
+description | The name of the task
 
 
 > Response with Status 200:
