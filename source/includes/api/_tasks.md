@@ -414,7 +414,7 @@ Column | Description
 ----------|---------------------------------
 started_at | The starting date of the tasks
 customer_name | The name of the customer
-logged_hour | The logged time of the task
+logged_hours | The logged time of the task
 logged_money | The logged money of the task
 currency | The currency used for the logging of money
 description | The name of the task
